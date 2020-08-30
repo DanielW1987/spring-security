@@ -1,0 +1,14 @@
+# Project exclude paths
+/01-spring-security-basic-auth/.gradle/
+/01-spring-security-basic-auth/build/
+/01-spring-security-basic-auth/build/classes/java/main/
+/01-spring-security-basic-auth/build/classes/java/test/
+/02-spring-security-config/.gradle/
+/02-spring-security-config/build/
+/02-spring-security-config/build/classes/java/main/
+/03-spring-security-memory-authentication/.gradle/
+/03-spring-security-memory-authentication/build/
+/03-spring-security-memory-authentication/build/classes/java/main/
+
+# Editor-based HTTP Client requests
+http-client.private.env.json
