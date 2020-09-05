@@ -1,5 +1,13 @@
 # In memory authentication
 
+The in memory user details manager:
+
+- implements `UserDetailsService`
+- used by Spring Boot Auto-configuration
+- non-persistent implementation (users in memory map)
+- mainly used for testing and demonstration purposes
+- not recommended to use it in production
+
 ## Spring Security Authentication Process
 
 ![Spring Security Authentication Process](images/spring-security-authentication-process.png "Spring Security Authentication Process")
