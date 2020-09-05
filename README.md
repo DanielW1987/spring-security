@@ -5,6 +5,9 @@ This repository is a learning repository that considers different aspects of Spr
 1. [Spring Security Basic Auth](https://github.com/DanielW1987/spring-security/tree/master/01-spring-security-basic-auth)
 1. [Spring Security Config](https://github.com/DanielW1987/spring-security/tree/master/02-spring-security-config)
 1. [Spring Security Memory Authentication](https://github.com/DanielW1987/spring-security/tree/master/03-spring-security-memory-authentication)
+1. [Spring Security Password Security](https://github.com/DanielW1987/spring-security/tree/master/04-spring-security-password-security)
+1. [Spring Security Custom Authentication Filter](https://github.com/DanielW1987/spring-security/tree/master/05-spring-security-custom-authentication-filter)
+1. [Spring Security Database Authentication](https://github.com/DanielW1987/spring-security/tree/master/06-spring-security-database-authentication)
 
 ## Web Resources
 
