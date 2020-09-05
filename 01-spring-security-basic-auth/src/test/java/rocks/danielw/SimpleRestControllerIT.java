@@ -9,6 +9,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -30,9 +31,15 @@ public class SimpleRestControllerIT {
   }
 
   @Test
-  @WithMockUser(username = "user")
+  @WithMockUser(username = "user") // can be any user
   void testFindPersons() throws Exception {
     mockMvc.perform(get("/api/v1/persons"))
+            .andExpect(status().isOk());
+  }
+
+  @Test
+  void testFindPersonsWithBasicAuth() throws Exception {
+    mockMvc.perform(get("/api/v1/persons").with(httpBasic("admin", "simsalabim"))) // must be the configured user and password
             .andExpect(status().isOk());
   }
 }
