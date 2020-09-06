@@ -1,14 +1,27 @@
 package rocks.danielw;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+  @Bean
+  PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
+
+//  @Bean
+//  PasswordEncoder delegatingPasswordEncoder() {
+//    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//  }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
@@ -22,33 +35,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    PasswordEncoder bcrypt = passwordEncoder();
     auth.inMemoryAuthentication()
             .withUser("admin")
-            // because we have no password encoder bean we can set no-op password encoder like this, only for demonstration purpose
-            .password("{noop}simsalabim")
+            .password(bcrypt.encode("simsalabim"))
             .roles("ADMIN")
             .and()
             .withUser("user")
-            // because we have no password encoder bean we can set no-op password encoder like this, only for demonstration purpose
-            .password("{noop}password")
+            .password(bcrypt.encode("password"))
             .roles("USER");
   }
-
-//  @Override
-//  @Bean
-//  protected UserDetailsService userDetailsService() {
-//    UserDetails adminDetails = User.withDefaultPasswordEncoder() // not recommended for production, no password encryption
-//            .username("admin")
-//            .password("simsalabim")
-//            .roles("ADMIN")
-//            .build();
-//
-//    UserDetails userDetails = User.withDefaultPasswordEncoder() // not recommended for production, no password encryption
-//            .username("user")
-//            .password("password")
-//            .roles("USER")
-//            .build();
-//
-//    return new InMemoryUserDetailsManager(adminDetails, userDetails);
-//  }
 }
